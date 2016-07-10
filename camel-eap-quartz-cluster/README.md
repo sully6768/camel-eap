@@ -20,7 +20,7 @@ If you intend to use a datastore other than MySQL you will need to download the 
 
 For our example we will be using a pair of JBoss EAP servers in standalone mode to demonstrate the Quartz2 cluster behavior.  You could just as easily do this using EAP in domain mode but for simplicity we will stick with standalone.  As such all configuration updates will happen under JBOSS_HOME/standalone.  
 
-**Configure MySQL**
+### Configure MySQL
 
 First we need to configure our test datastore.
 
@@ -98,7 +98,7 @@ First we need to configure our test datastore.
 
 We are now finished with the datastore setup.
 
-**Spring Context Support EAP**
+### Add Spring Context Support in EAP
 
 JBoss EAP, once the Fuse subsystem is applied, includes a number of APIs including Spring Context. It does not include the Spring Context Support APIs though which includes the Quartz helper APIs.  So lets add them to our installation.
 
@@ -146,6 +146,8 @@ JBoss EAP, once the Fuse subsystem is applied, includes a number of APIs includi
         ~/.m2/repository/org/springframework/spring-context-support/4.1.6.RELEASE/spring-context-support-4.1.6.RELEASE.jar \
         /opt/jboss/eap/jboss-eap-6.4-fuse-6.2.1-c1/modules/org/springframework/context/support/main/.
     ```     
+
+Now we are finished with setting up EAP we are ready to run our Camel Quartz Application
 
 
 
