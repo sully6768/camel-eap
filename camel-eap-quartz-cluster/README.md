@@ -32,21 +32,18 @@ First we need to configure our test datastore.
     sql> grant all privileges on quartz2.* to 'quartz2'@'localhost';
     sql> exit;
 ```
-
 2. Create the Quartz2 schema
 ```
 	propt> mysql -u root -p quartz2 < $QUARTZ2_HOME/docs/dbTables/tables_mysql_innodb.sql
 ```
-
 3. Install the MySQL Driver in the Application Server
-
-*   Create the following directory structure under JBOSS_HOME
-
+* Create the following directory structure under JBOSS_HOME
+```
 	export JBOSS_HOME=path-to-install
 	cd $JBOSS_HOME
 	mkdir -p modules/com/mysql/main
-
-*   Download the MySQL driver and 
+```
+* Download the MySQL driver and 
 
 
 
