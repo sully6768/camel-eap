@@ -10,7 +10,7 @@ To work with this example you will need to install and configure a datasource to
 
 ## Optional Prerequisites
 
-**Quartz 2.2.x**
+### Quartz 2.2.x
 
 If you intend to use a datastore other than MySQL you will need to download the Quartz binary:
 
@@ -20,7 +20,7 @@ If you intend to use a datastore other than MySQL you will need to download the 
 
 For our example we will be using a pair of JBoss EAP servers in standalone mode to demonstrate the Quartz2 cluster behavior.  You could just as easily do this using EAP in domain mode but for simplicity we will stick with standalone.  As such all configuration updates will happen under JBOSS_HOME/standalone.  
 
-**Configure MySQL**
+### Configure MySQL
 
 First we need to configure our test datastore.
 
@@ -34,8 +34,10 @@ First we need to configure our test datastore.
 ```
 
 2. Create the Quartz2 schema
-
+```
 	propt> mysql -u root -p quartz2 < $QUARTZ2_HOME/docs/dbTables/tables_mysql_innodb.sql
+```
+
 3. Install the MySQL Driver in the Application Server
 
 *   Create the following directory structure under JBOSS_HOME
