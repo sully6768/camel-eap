@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  #%L
+  Wildfly Camel
+  %%
+  Copyright (C) 2013 - 2015 RedHat
+  %%
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  #L%
+  -->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context" xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd         http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd         http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+    <jee:jndi-lookup expected-type="javax.sql.DataSource" id="quartzDataSource" jndi-name="java:jboss/datasources/MYSQLQUARTZDS"/>
+    <bean class="org.apache.camel.component.quartz2.QuartzComponent" id="quartz">
+        <property name="scheduler" ref="scheduler"/>
+    </bean>
+    <bean class="com.redhat.wildfly.camel.spring.quartz.DateProcessor" id="dateProcessor"/>
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean" id="scheduler">
+        <property name="dataSource" ref="quartzDataSource"/>
+        <property name="autoStartup" value="false"/>
+        <property name="schedulerContextAsMap">
+            <!-- hook Camel into Quartz -->
+            <map>
+                <!-- CamelJob makes use of the following key below to find the same Job as we failover to 'app-two' -->
+                <!-- QuartzConstants.QUARTZ_CAMEL_CONTEXT + "-" + camelContextName  -->
+                <entry key="CamelQuartzCamelContext" value-ref="quartzCluster"/>
+            </map>
+        </property>
+        <property name="quartzProperties">
+            <props>
+                <prop key="org.quartz.scheduler.instanceName">demoscheduler</prop>
+                <prop key="org.quartz.scheduler.instanceId">AUTO</prop>
+                <prop key="org.quartz.scheduler.skipUpdateCheck">true</prop>
+                <prop key="org.quartz.jobStore.driverDelegateClass">org.quartz.impl.jdbcjobstore.StdJDBCDelegate</prop>
+                <prop key="org.quartz.jobStore.isClustered">true</prop>
+                <prop key="org.quartz.jobStore.clusterCheckinInterval">5000</prop>
+            </props>
+        </property>
+    </bean>
+    <camelContext id="camel-context" xmlns="http://camel.apache.org/schema/spring">
+        <route id="_clusteredRoute1">
+            <from id="_from1" uri="quartz://clustergroup/clusterTimerName?job.name=demoQuartzCluster&amp;cron=0/5+*+*+*+*+?"/>
+            <to id="_process1" uri="bean:dateProcessor"/>
+            <log id="_log1" message="Fired quartz cluster trigger: ${body}"/>
+        </route>
+    </camelContext>
+</beans>
