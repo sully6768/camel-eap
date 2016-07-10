@@ -27,4 +27,4 @@ target
 .checkstyle
 *.log
 .tern-project
-/build.metadata
+build.metadata
