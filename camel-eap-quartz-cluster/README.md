@@ -20,7 +20,7 @@ If you intend to use a datastore other than MySQL you will need to download the 
 
 For our example we will be using a pair of JBoss EAP servers in standalone mode to demonstrate the Quartz2 cluster behavior.  You could just as easily do this using EAP in domain mode but for simplicity we will stick with standalone.  As such all configuration updates will happen under JBOSS_HOME/standalone.  
 
-### Configure MySQL
+**Configure MySQL**
 
 First we need to configure our test datastore.
 
