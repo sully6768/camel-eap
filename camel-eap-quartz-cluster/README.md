@@ -72,7 +72,7 @@ First we need to configure our test datastore.
 4. Add the driver to the standalone.xml JBoss configuration.  
     * Open JBOSS_HOME/standalone/configuration/standalone.xml with your favorite text editor. 
     * Search for the datasource subsystem element: 
-        * <subsystem xmlns="urn:jboss:domain:datasources:1.2">
+        * `<subsystem xmlns="urn:jboss:domain:datasources:1.2">`
     * Add the following xml fragments to the datasources element:
     
     ```
