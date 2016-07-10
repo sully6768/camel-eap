@@ -51,8 +51,7 @@ First we need to configure our test datastore.
     * Create the modules descriptor for the MySQL Driver
 
     ```
-    cd modules/com/mysql/main
-    touch module.xml
+    touch modules/com/mysql/main/module.xml
     ```
     
     * Open module.xml and add the following contents:
@@ -72,7 +71,7 @@ First we need to configure our test datastore.
 
 4. Add the driver to the standalone.xml JBoss configuration.  
     * Open JBOSS_HOME/standalone/configuration/standalone.xml with your favorite text editor. 
-    * Search for the datasource subsystem element: <subsystem xmlns="urn:jboss:domain:datasources:1.2">
+    * Search for the datasource subsystem element: **<subsystem xmlns="urn:jboss:domain:datasources:1.2">**
     * Add the following xml fragments to the datasources element:
     
     ```
@@ -95,7 +94,7 @@ First we need to configure our test datastore.
     ```
     
 
-Add the xml fragment below under datasources element:
+
 
 1. Install JBoss EAP 6.4
 
