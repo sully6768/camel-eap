@@ -25,6 +25,7 @@ For our example we will be using a pair of JBoss EAP servers in standalone mode 
 First we need to configure our test datastore.
 
 1. Create a Quartz2 database, user and grant the user privileges
+    
     ```
     prompt> mysql -u root -p
     sql> create database quartz2;
@@ -32,12 +33,16 @@ First we need to configure our test datastore.
     sql> grant all privileges on quartz2.* to 'quartz2'@'localhost';
     sql> exit;
     ```
+
 2. Create the Quartz2 schema
+
     ```
 	propt> mysql -u root -p quartz2 < $QUARTZ2_HOME/docs/dbTables/tables_mysql_innodb.sql
     ```
+
 3. Install the MySQL Driver in the Application Server
     * Create the following directory structure under JBOSS_HOME
+
     ```
 	export JBOSS_HOME=path-to-install
 	cd $JBOSS_HOME
