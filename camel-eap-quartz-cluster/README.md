@@ -48,9 +48,27 @@ First we need to configure our test datastore.
 	cd $JBOSS_HOME
 	mkdir -p modules/com/mysql/main
     ```
-    * Download the MySQL driver and 
+    * Create the modules descriptor for the MySQL Driver
 
-
+    ```
+    cd modules/com/mysql/main
+    touch module.xml
+    ```
+    
+    * Open module.xml and add the following contents:
+    
+    ```
+    <?xml version="1.0" encoding="UTF-8"?>
+    <module xmlns="urn:jboss:module:1.0" name="com.mysql">
+        <resources>
+            <resource-root path="mysql-connector-java-5.1.39-bin.jar"/>
+        </resources>
+        <dependencies>
+            <module name="javax.api"/>
+            <module name="javax.transaction.api"/>
+        </dependencies>
+    </module>
+    ```
 
 1. Install JBoss EAP 6.4
 
