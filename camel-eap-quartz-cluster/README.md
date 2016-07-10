@@ -70,6 +70,30 @@ First we need to configure our test datastore.
     </module>
     ```
 
+4. Add the driver to the standalone.xml JBoss configuration.  
+    * Open JBOSS_HOME/standalone/configuration/standalone.xml with your favorite text editor. 
+    * Search for the datasource subsystem element: <subsystem xmlns="urn:jboss:domain:datasources:1.2">
+    * Add the following xml fragments to the datasources element:
+```
+<datasource jndi-name="java:jboss/datasources/MYSQLQUARTZDS" pool-name="MYSQLQUARTZDS" enabled="true" use-java-context="true">
+    <connection-url>jdbc:mysql://localhost:3306/databaseName</connection-url>
+    <driver>mysqlDriver</driver>
+    <security>
+    <user-name>quartz2</user-name>
+    <password>quartz2123</password>
+    </security>
+</datasource>
+```
+    * Find the drivers element under the datasources element and add the following:
+```
+<driver name="mysqlDriver" module="com.mysql">
+    <xa-datasource-class>com.mysql.jdbc.Driver</xa-datasource-class>
+</driver>
+```
+    
+
+Add the xml fragment below under datasources element:
+
 1. Install JBoss EAP 6.4
 
 1. Install JBoss Fuse 6.2.1 Rollup 2 on your EAP
