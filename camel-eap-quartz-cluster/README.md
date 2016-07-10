@@ -75,24 +75,24 @@ First we need to configure our test datastore.
     * Search for the datasource subsystem element: <subsystem xmlns="urn:jboss:domain:datasources:1.2">
     * Add the following xml fragments to the datasources element:
     
-```
-<datasource jndi-name="java:jboss/datasources/MYSQLQUARTZDS" pool-name="MYSQLQUARTZDS" enabled="true" use-java-context="true">
-    <connection-url>jdbc:mysql://localhost:3306/databaseName</connection-url>
-    <driver>mysqlDriver</driver>
-    <security>
-    <user-name>quartz2</user-name>
-    <password>quartz2123</password>
-    </security>
-</datasource>
-```
+    ```
+    <datasource jndi-name="java:jboss/datasources/MYSQLQUARTZDS" pool-name="MYSQLQUARTZDS" enabled="true" use-java-context="true">
+        <connection-url>jdbc:mysql://localhost:3306/databaseName</connection-url>
+        <driver>mysqlDriver</driver>
+        <security>
+        <user-name>quartz2</user-name>
+        <password>quartz2123</password>
+        </security>
+    </datasource>
+    ```
 
     * Find the drivers element under the datasources element and add the following:
 
-```
-<driver name="mysqlDriver" module="com.mysql">
-    <xa-datasource-class>com.mysql.jdbc.Driver</xa-datasource-class>
-</driver>
-```
+    ```
+    <driver name="mysqlDriver" module="com.mysql">
+        <xa-datasource-class>com.mysql.jdbc.Driver</xa-datasource-class>
+    </driver>
+    ```
     
 
 Add the xml fragment below under datasources element:
