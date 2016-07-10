@@ -3,7 +3,7 @@
   #%L
   Wildfly Camel
   %%
-  Copyright (C) 2013 - 2015 RedHat
+  Copyright (C) 2013 - 2016 RedHat
   %%
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -18,24 +18,48 @@
   limitations under the License.
   #L%
   -->
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context" xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd         http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd         http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
-    
-    <jee:jndi-lookup expected-type="javax.sql.DataSource" id="quartzDataSource" jndi-name="java:jboss/datasources/MYSQLQUARTZDS"/>
-    
-    <bean class="org.apache.camel.component.quartz2.QuartzComponent" id="quartz">
-        <property name="scheduler" ref="scheduler"/>
+<beans
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:jee="http://www.springframework.org/schema/jee"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+    <jee:jndi-lookup
+        expected-type="javax.sql.DataSource"
+        id="quartzDataSource"
+        jndi-name="java:jboss/datasources/MYSQLQUARTZDS" />
+
+    <bean
+        class="org.apache.camel.component.quartz2.QuartzComponent"
+        id="quartz">
+        <property
+            name="scheduler"
+            ref="scheduler" />
     </bean>
-    
-    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean" id="scheduler">
-        <property name="dataSource" ref="quartzDataSource"/>
-        <property name="autoStartup" value="false"/>
+
+    <bean
+        class="org.springframework.scheduling.quartz.SchedulerFactoryBean"
+        id="scheduler">
+        <property
+            name="dataSource"
+            ref="quartzDataSource" />
+        <property
+            name="autoStartup"
+            value="false" />
         <property name="schedulerContextAsMap">
             <!-- hook Camel into Quartz -->
             <map>
                 <!-- CamelJob makes use of the following key below to find the same Job as we failover to 'app-two' -->
                 <!-- QuartzConstants.QUARTZ_CAMEL_CONTEXT + "-" + camelContextName  -->
-                <entry key="CamelQuartzCamelContext" value-ref="quartzCluster"/>
+                <entry
+                    key="CamelQuartzCamelContext"
+                    value-ref="quartzCluster" />
             </map>
         </property>
         <property name="quartzProperties">
@@ -49,14 +73,24 @@
             </props>
         </property>
     </bean>
-    
-    <bean class="com.redhat.wildfly.camel.spring.quartz.DateProcessor" id="dateProcessor"/>
-    
-    <camelContext id="quartzCluster" xmlns="http://camel.apache.org/schema/spring">
+
+    <bean
+        class="com.redhat.wildfly.camel.spring.quartz.DateProcessor"
+        id="dateProcessor" />
+
+    <camelContext
+        id="quartzCluster"
+        xmlns="http://camel.apache.org/schema/spring">
         <route id="_clusteredRoute1">
-            <from id="_from1" uri="quartz://clustergroup/clusterTimerName?job.name=demoQuartzCluster&amp;cron=0/5+*+*+*+*+?"/>
-            <to id="_process1" uri="bean:dateProcessor"/>
-            <log id="_log1" message="Fired quartz cluster trigger: ${body}"/>
+            <from
+                id="_from1"
+                uri="quartz://clustergroup/clusterTimerName?job.name=demoQuartzCluster&amp;cron=0/5+*+*+*+*+?" />
+            <to
+                id="_process1"
+                uri="bean:dateProcessor" />
+            <log
+                id="_log1"
+                message="Fired quartz cluster trigger: ${body}" />
         </route>
     </camelContext>
 </beans>
