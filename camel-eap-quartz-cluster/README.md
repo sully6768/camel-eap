@@ -139,7 +139,7 @@ JBoss EAP, once the Fuse subsystem is applied, includes a number of APIs includi
     </module>
     ```
     
-    * Copy the `spring-context-support-4.1.6.RELEASE.jar` from your local maven repository to the main directory
+    * Copy the `spring-context-support-4.1.6.RELEASE.jar` from your local maven repository to the newly created modules main directory
     
     ```
     cp \
