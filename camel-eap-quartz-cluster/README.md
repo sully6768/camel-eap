@@ -68,6 +68,8 @@ First we need to configure our test datastore.
         </dependencies>
     </module>
     ```
+    
+    * Copy the downloaded MySQL driver to the `modules/com/mysql/main` directory
 
 4. Add the driver to the standalone.xml JBoss configuration.  
     * Open JBOSS_HOME/standalone/configuration/standalone.xml with your favorite text editor. 
@@ -93,7 +95,57 @@ First we need to configure our test datastore.
         <xa-datasource-class>com.mysql.jdbc.Driver</xa-datasource-class>
     </driver>
     ```
+
+We are now finished with the datastore setup.
+
+**Spring Context Support EAP**
+
+JBoss EAP, once the Fuse subsystem is applied, includes a number of APIs including Spring Context. It does not include the Spring Context Support APIs though which includes the Quartz helper APIs.  So lets add them to our installation.
+
+* Create the following directory structure under JBOSS_HOME
+
+    ```
+    cd $JBOSS_HOME
+    mkdir -p modules/org/springframework/context/support/main
+    ```
+
+* Create the modules descriptor for the Spring Context Support API
+
+    ```
+    touch modules/org/springframework/context/support/main/module.xml
+    ```
     
+* Open module.xml and add the following contents:
+    
+    ```
+    <?xml version="1.0" encoding="UTF-8"?>
+    <module xmlns="urn:jboss:module:1.1" name="org.springframework.context.support">
+      <resources>
+        <resource-root path="spring-context-support-4.1.6.RELEASE.jar" />
+      </resources>
+      <dependencies>
+        <module name="javax.api" />
+        <module name="org.apache.camel.script.groovy" />
+        <module name="org.apache.commons.logging" />
+        <module name="org.springframework.core" />
+        <module name="org.springframework.context" />
+        <module name="org.springframework.aop" />
+        <module name="org.springframework.beans" />
+        <module name="org.springframework.expression" />
+        <module name="org.springframework.tx" />
+        <module name="org.springframework.jdbc" />
+        <module name="org.quartz" />
+      </dependencies>
+    </module>
+    ```
+    
+    * Copy the `spring-context-support-4.1.6.RELEASE.jar` from your local maven repository to the main directory
+    
+    ```
+    cp \
+        ~/.m2/repository/org/springframework/spring-context-support/4.1.6.RELEASE/spring-context-support-4.1.6.RELEASE.jar \
+        /opt/jboss/eap/jboss-eap-6.4-fuse-6.2.1-c1/modules/org/springframework/context/support/main/.
+    ```     
 
 
 
