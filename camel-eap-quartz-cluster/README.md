@@ -39,13 +39,13 @@ First we need to configure our test datastore.
 ```
 
 3. Install the MySQL Driver in the Application Server
-* Create the following directory structure under JBOSS_HOME
-```
+    * Create the following directory structure under JBOSS_HOME
+    ```
 	export JBOSS_HOME=path-to-install
 	cd $JBOSS_HOME
 	mkdir -p modules/com/mysql/main
-```
-* Download the MySQL driver and 
+    ```
+    * Download the MySQL driver and 
 
 
 
