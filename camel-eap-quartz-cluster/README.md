@@ -7,13 +7,6 @@ To work with this example you will need to install and configure a datasource to
 
 * MySQL (I installed the latest 5.7.13 but any should do) [Download](http://dev.mysql.com/downloads/mysql/ "MySQL Download")  
 * MySQL Driver [Download](https://dev.mysql.com/downloads/connector/j/ "MySQL Driver Download") 
-
-## Optional Prerequisites
-
-### Quartz 2.2.x
-
-If you intend to use a datastore other than MySQL you will need to download the Quartz binary:
-
 * Quartz 2.2.x [Download](http://d2zwv9pap9ylyd.cloudfront.net/quartz-2.2.3-distribution.tar.gz "Download")  
 
 ## Getting started
@@ -147,15 +140,10 @@ JBoss EAP, once the Fuse subsystem is applied, includes a number of APIs includi
         /opt/jboss/eap/jboss-eap-6.4-fuse-6.2.1-c1/modules/org/springframework/context/support/main/.
     ```     
 
-Now we are finished with setting up EAP we are ready to run our Camel Quartz Application
 
+## Running the application
 
-
-1. Install JBoss EAP 6.4
-
-1. Install JBoss Fuse 6.2.1 Rollup 2 on your EAP
-
-2. Conifgure a `$JBOSS_HOME` environment variable to point at your application server installation directory
+1. Configure the `$JBOSS_HOME` environment variable to point at your application server installation directory
 
 3. Start the application server from the command line
 
