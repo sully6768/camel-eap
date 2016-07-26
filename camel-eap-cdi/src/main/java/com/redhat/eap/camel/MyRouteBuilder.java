@@ -43,11 +43,14 @@ import org.apache.camel.cdi.ContextName;
 
 @Startup
 @ApplicationScoped
-@ContextName("cdi-context")
+@ContextName("camel-context")
 public class MyRouteBuilder extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-    	from("direct:start").beanRef("helloBean");
+    	from("timer://foo?fixedRate=true&period=5000")
+    		.setBody().constant("Scott")
+    		.beanRef("helloBean")
+    		.log("Message: ${body}");
     }
 }

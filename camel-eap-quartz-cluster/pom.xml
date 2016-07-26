@@ -18,7 +18,10 @@
   limitations under the License.
   #L%
   -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -42,7 +45,7 @@
 
         <!-- Other versions -->
         <version.apache.camel>2.15.1.redhat-621107</version.apache.camel>
-<!--         <version.junit>4.11</version.junit> -->
+        <!-- <version.junit>4.11</version.junit> -->
 
         <!-- Plugin versions -->
         <version.maven.compiler.plugin>3.1</version.maven.compiler.plugin>
@@ -83,6 +86,11 @@
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-quartz2</artifactId>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-metrics</artifactId>
+<!--             <version>x.x.x</version> -->
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>

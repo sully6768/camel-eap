@@ -26,20 +26,34 @@
          http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
          http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd">
 
-<!--     <import resource="classpath:META-INF/spring/camel-cxf.xml" /> -->
-
     <cxf:cxfEndpoint
         id="orderEndpoint"
         address="/order"
         serviceClass="camelinaction.order.OrderEndpoint"
         wsdlURL="wsdl/order.wsdl" />
 
+    <bean
+        id="soapProcessor"
+        class="com.redhat.eap.camel.cxf.contract.first.SoapProcessor" />
+
     <camelContext xmlns="http://camel.apache.org/schema/spring">
 
-        <route>
+        <route id="_cxf_router">
             <!-- route starts from the cxf webservice, see camel-cxf.xml for details -->
-            <from uri="cxf:bean:orderEndpoint" />
-            <to uri="seda:incomingOrders" />
+            <from
+                id="_cxf_endpoint"
+                uri="cxf:bean:orderEndpoint?dataFormat=PAYLOAD" />
+<!--             <from -->
+<!--                 id="_cxf_endpoint" -->
+<!--                 uri="cxf:bean:orderEndpoint" /> -->
+            <to
+                id="_soap_processor"
+                uri="bean:soapProcessor" />
+            <log message="Post Processor: ${body}" />
+            <camel:convertBodyTo type="org.apache.camel.component.cxf.CxfPayload" />
+            <to
+                id="_seda_out"
+                uri="seda:incomingOrders" />
             <!-- and then create the OK reply for the webservice which is still waiting for a reply -->
             <transform>
                 <constant>OK</constant>
@@ -47,9 +61,9 @@
         </route>
   
         <!-- test route -->
-        <route>
+        <route id="_seda_router">
             <from uri="seda:incomingOrders" />
-            <to uri="mock:end" />
+            <log message="Message Body: ${body}" />
         </route>
     </camelContext>
 

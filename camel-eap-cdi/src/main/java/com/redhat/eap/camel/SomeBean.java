@@ -35,12 +35,15 @@
  */
 package com.redhat.eap.camel;
 
+import java.util.Date;
+
 import javax.inject.Named;
 
 @Named("helloBean")
 public class SomeBean {
 
     public String someMethod(String message) {
-        return "Hello " + message;
+    	String out = "Hello " + message + ". Its " + new Date() + ".";
+        return out;
     }
 }
