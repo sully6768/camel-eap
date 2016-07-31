@@ -19,6 +19,7 @@
         <module>camel-eap-cdi</module>
         <module>camel-eap-cxf-contract-first</module>
         <module>camel-eap-quartz-cluster</module>
+        <module>camel-eap-quartz-sql-poller</module>
     </modules>
 
     <repositories>
