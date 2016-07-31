@@ -141,14 +141,15 @@
                 id="_from1"
                 uri="quartz://clustergroup/clusterTimerName?job.name=demoQuartzCluster&amp;cron=0/5+*+*+*+*+?" />
             <enrich
-                uri="sql:select first_name, last_name from employees where emp_no = 10001"
+                uri="sql:select * from employees where emp_no = 10001"
                 strategyRef="useLatestAggregationStrategy" />
             <marshal>
                 <json prettyPrint="true" />
             </marshal>
-            <log
-                id="_log1"
-                message="Fired quartz cluster trigger: ${body}" />
+            <to id="_jms_producer" uri="activemq:queue:SQLPROCESSORQueue"/>
+<!--             <log -->
+<!--                 id="_log1" -->
+<!--                 message="Fired quartz cluster trigger: ${body}" /> -->
         </route>
     </camelContext>
 </beans>
