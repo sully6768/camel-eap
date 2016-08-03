@@ -1,19 +1,9 @@
-contract-first-camel-eap
+camel-eap-cxf-contract-first
 ========================
 
 Demo of contract-first web services on JBoss EAP
 
 We use spring-web to bootstrap the Camel context. 
-
-
-### Build
-Normal fat war:
-
-    mvn clean install
-    
-Skinny war:
-
-    mvn clean install -Pskinny
     
   
 

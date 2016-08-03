@@ -20,6 +20,7 @@
         <module>camel-eap-cxf-contract-first</module>
         <module>camel-eap-quartz-cluster</module>
         <module>camel-eap-quartz-sql-poller</module>
+        <module>camel-jackson-transformer</module>
     </modules>
 
     <repositories>
