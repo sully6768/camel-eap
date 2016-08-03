@@ -84,6 +84,12 @@
     <camelContext
         id="quartzCluster"
         xmlns="http://camel.apache.org/schema/spring">
+        
+<!--         <dataFormats> -->
+<!--             <json -->
+<!--                 id="jack" -->
+<!--                 library="Jackson" /> -->
+<!--         </dataFormats> -->
         <route id="_clusteredRoute1">
             <from
                 id="_from1"
