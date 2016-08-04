@@ -16,6 +16,7 @@
     <packaging>pom</packaging>
     
     <modules>
+        <module>eap-mdb-consumers</module>
         <module>camel-eap-cdi</module>
         <module>camel-eap-cxf-contract-first</module>
         <module>camel-eap-quartz-cluster</module>
