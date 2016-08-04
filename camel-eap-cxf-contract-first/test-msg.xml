@@ -1,0 +1,13 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ord="http://order.camelinaction">
+   <soapenv:Header>
+      <ord:Secured>
+         <user>myuser</user>
+         <password>password</password>
+      </ord:Secured>
+   </soapenv:Header>
+   <soapenv:Body>
+      <ord:partName>Z28 Header</ord:partName>
+      <ord:amount>1000</ord:amount>
+      <ord:customerName>Jane Doe</ord:customerName>
+   </soapenv:Body>
+</soapenv:Envelope>

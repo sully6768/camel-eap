@@ -28,7 +28,7 @@
 
     <bean
         id="soapActionInInterceptor"
-        class="com.redhat.eap.camel.cxf.contract.first.SoapActionInInterceptor" />
+        class="io.github.sully6768.examples.camel.cxf.eap.interceptor.BasicAuthAuthorizationInterceptor" />
 
     <cxf:cxfEndpoint
         id="orderEndpoint"
@@ -39,10 +39,6 @@
             <ref bean="soapActionInInterceptor" />
         </cxf:inInterceptors>
     </cxf:cxfEndpoint>
-
-    <bean
-        id="soapProcessor"
-        class="com.redhat.eap.camel.cxf.contract.first.SoapProcessor" />
 
     <camelContext xmlns="http://camel.apache.org/schema/spring">
 
